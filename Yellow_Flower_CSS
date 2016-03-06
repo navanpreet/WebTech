@@ -1,0 +1,228 @@
+<style>
+
+body {
+	background-image: url("http://cs-server.usc.edu:45678/hw/hw3/images/background.png");
+	background-repeat: repeat-x;
+	background-color: #fcfbce;
+	margin:0;
+	padding:0;
+}	
+
+.main {
+	background-image: url("http://cs-server.usc.edu:45678/hw/hw3/images/main.jpg");
+    position: relative;
+    width: 940px;
+    height: 354px;
+    margin: -25px auto auto;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.parentmenu {
+	position: relative;
+	background-color: #Fdf9d9;
+	margin: auto;
+	height:69px;
+	width:940px;
+}
+
+.menu {
+	background-image: url("http://cs-server.usc.edu:45678/hw/hw3/images/menu.png");
+	position: relative;
+	height:69px;
+	width:940px;
+	margin: auto;
+}
+
+p {
+	font-family: "Times New Roman", Times, serif;
+}
+
+#p1 {
+	font-size: 150%;
+	position: relative;
+	top: 220px;
+	left: 520px;
+	width: 403px;
+}
+
+#yellow {
+	color: #AC9800;
+	font-size: 130%;
+	margin-left: -67px;
+	font-weight: bold;
+}
+
+#flower {
+	color: #F3D861;
+	font-size: 130%;
+	font-weight: bold;
+}
+
+#site {
+	margin-left: 15px;
+	font-weight: bold;
+	font-size:90%;
+	margin-left:-25px;
+	position: relative;
+	bottom: 6px;	
+}
+
+#home {
+	font-size: 105%;
+	font-weight: bold;
+	color: #3c3600;
+	text-decoration: none;
+	position: relative;
+	top: 15px;
+	left: 75px;
+}
+
+a#home:hover {
+	color: purple;
+}
+
+#about {
+	font-size: 105%;
+	font-weight: bold;
+	color: #3c3600;
+	text-decoration: none;
+	position: relative;
+	top: 15px;
+	left: 175px;	
+}
+
+a#about:hover {
+	color: purple;
+}
+
+#products {
+	font-size: 105%;
+	font-weight: bold;
+	color: #3c3600;
+	text-decoration: none;
+	position: relative;
+	top: 15px;
+	left: 265px;	
+}
+
+a#products:hover {
+	color: purple;
+}
+
+#services {
+	font-size: 105%;
+	font-weight: bold;
+	color: #3c3600;
+	text-decoration: none;
+	position: relative;
+	top: 15px;
+	left: 355px;	
+}
+
+a#services:hover {
+	color: purple;
+}
+
+#design {
+	font-size: 105%;
+	font-weight: bold;
+	color: #3c3600;
+	text-decoration: none;
+	position: relative;
+	top: 15px;
+	left: 445px;	
+}
+
+a#design:hover {
+	color: purple ;
+}
+
+#contact {
+	font-size: 105%;
+	font-weight: bold;
+	color: #3c3600;
+	text-decoration: none;
+	position: relative;
+	top: 15px;
+	left: 535px;	
+}
+
+a#contact:hover {
+	color: purple;
+}
+
+.supercontainer {
+    position: relative;
+    width: 940px;
+    height: 325px;
+    margin: auto;
+
+}
+
+.container {
+	background-color: white;
+	position: relative;
+	width: 900px;
+	height: 338px;
+	margin: auto;
+	top: -20px;
+}
+
+#aboutheading {
+	margin-left: 7px;
+	position: relative;
+	top: 2px;
+}
+
+#par1 {
+	margin-left: 7px;
+	font-size: 87%;
+	position: relative;
+	top: -10px;
+	color: #051b38;
+}
+
+#par2 {
+	margin-left: 7px;
+	font-size: 87%;
+	position: relative;
+	top: -1px;
+	color: #051b38;
+}
+
+#moreinformation {
+	margin-left: 7px;
+	position: relative;
+	top: 1px;
+	color: #051b38;
+}
+
+#par3 {
+	margin-left: 7px;
+	font-size: 87%;
+	position: relative;
+	top:-18px;
+	color: #051b38;
+}
+
+#bottomlink {
+	font-weight: bold;
+	color: #E5CC00;
+	text-decoration: none;
+}
+
+#par4 {
+position: relative;
+left: 350px;
+color: #051B38;
+width: 300px;
+bottom: 10px;
+}
+
+#lastlink {
+	font-weight: bold;
+	color: #E5CC00;
+	text-decoration: none;
+}
+</style>
