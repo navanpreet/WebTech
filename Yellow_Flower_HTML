@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>YellowFlower| california web design </title>
+	<link rel="stylesheet" type="text/css" href="571hw3CSS.css">
+</head>
+
+
+<body>
+	<div class="main" style="text-align: center">
+				<p id="p1" style="color:#776A00;"><span id="yellow">Yellow</span><span id="flower">Flower</span><br><span id="site">A site by Brian Calhoun</span></p>
+	</div>
+	<div class="parentmenu">
+	<div class="menu">
+	<a id="home" href="linkpage.html#homelink" target="_blank">Home</a>
+	<a id="about" href="linkpage.html#aboutlink" target="_blank">About</a>
+	<a id="products" href="linkpage.html#productslink" target="_blank">Products</a>
+	<a id="services" href="linkpage.html#serviceslink" target="_blank">Services</a>
+	<a id="design" href="linkpage.html#designlink" target="_blank">Design</a>
+	<a id="contact" href="linkpage.html#contactlink" target="_blank">Contact</a>
+	</div>
+	</div>
+	
+	<div class="supercontainer">
+		<div class="container">
+			<h2 id="piglatin" style="margin-left: 7px;position:relative;top:-5px;">Pig and PigLatin</h2>
+			<h3 id="aboutheading">About</h3>
+				<p id="par1">Pig was initially developed at Yahoo! to allow people using Apache Hadoop&#174 to focus more on analyzing large data sets and spend less time having to write <br> mapper and reducer programs. Like actual pigs, who eat almost anything, the Pig programming language is designed to handle any kind of data&#150hence the<br>name!.</p>
+				<p id="par2">Pig is made up of two components: the first is the language itself, which is called PigLatin (yes, people naming various Hadoop projects do tend to have a<br>sense of humor associated with their naming conventions), and the second is a runtime environment where PigLatin programs are executed. Think of the<br>relationship between a Java Virtual Maching (JVM) and a Java application. In this section, we'll just refer to the whole entity as Pig.</p>
+				<h3 id="moreinformation">More information</h3>
+				<p id="par3">Stay on top of all the changes, including Hadoop-based analytics, streaming analytics, warehousing (including BigSQL), data asset discovery, integration<br>and governance. <a id="bottomlink" href="linkpage.html#normallink" target="_blank">This is what a normal links looks like</a>.</p>
+				<p id="par4"><a id="lastlink" href="linkpage.html#websitelink" target="_blank">Website</a> by <a id="lastlink" href="linkpage.html#canvaslink" target="_blank">Super Canvas Design</a></p>
+		</div>
+	</div>
+
+<noscript>	
+</body>
+</html>
+</noscript></body></html>
