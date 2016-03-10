@@ -1,0 +1,283 @@
+<html>
+<head>
+    <title>Stock Search</title>    
+</head>
+
+<style>
+    div {
+        width:370px;
+        height: 150px;
+        margin:auto;
+        text-align: center;
+        background-color: #f3f3f3;
+            
+    }
+    form {
+        margin:0 auto;
+    }
+    
+    #submitId {
+        position: relative;
+        left: 75px;
+        top:5px;
+        background-color: #f3f3f3;
+        border-radius: 5px;
+        box-shadow:none;
+        text-shadow:none;
+    }
+    
+    #clear {
+        position: relative;
+        left: 80px;
+        top:5px;
+        background-color: #f3f3f3;
+        border-radius: 5px;
+        box-shadow:none;
+        text-shadow:none;
+    }
+    
+    #link {
+        position: relative;
+        top: 10px;
+    }
+    
+    h1 {
+        position: relative;
+        top: 10px;
+    }
+
+    .xmlTable {
+        position: relative;
+        top: 10px;
+        background-color: #f3f3f3;
+        border-collapse: collapse;
+        column-width: 100px;
+    }
+
+    .xmlNoRecordsFound {
+        position: relative;
+        top: 10px;
+        background-color: #f3f3f3;
+        border-collapse: collapse;
+        width: 450px;
+    }
+
+    .xmlTableTd {
+        text-align: left;
+        padding-right: 10px;
+    }
+
+    .xmlTableTh {
+    }
+        
+    .jsonTable {
+        position: relative;
+        top: 10px;
+        border-collapse: collapse;
+        background-color: #f3f3f3;
+        width: 450px;
+    }
+
+    th {
+        text-align: left;
+    }
+
+    td {
+        text-align: center;
+    }
+    
+</style>
+<body>
+    <div>
+        <h1><i>Stock Search</i></h1>
+        <hr>
+        <form action="" method="get" name= "stockForm" id="stockFormId">
+            Company Name or Symbol: <input type="text" id="userInput" name=userInput value="<?php echo (isset($_GET['userInput']) ? $_GET['userInput'] : ''); ?>" required><br>
+            <input id="submitId" type="submit" name="submit" value="Search">
+            <input id="clear" type="button" value="Clear" onclick="clearFunction()"><br>
+            <a id="link" href="http://www.markit.com/product/markit-on-demand">Powered by Markit on Demand</a>
+        </form>        
+    </div>
+
+    <script>
+        function clearFunction(){
+            var text = this.document.getElementById("userInput");
+            text.value="";
+            //var form = document.getElementById("stockFormId");
+            //form.submit();
+            var tab = this.document.getElementById("xmlTable");
+            if(tab){
+                tab.parentNode.removeChild(tab);
+            }    
+            var tab2 = this.document.getElementById("jsonTable");
+            if(tab2){
+                tab2.parentNode.removeChild(tab2);
+            }    
+            var tab3 = this.document.getElementById("xmlNoRecordsFound");
+            if(tab3){
+                tab3.parentNode.removeChild(tab3);
+            }
+            var tab4 = this.document.getElementById("jsonNoStockInformation");
+            if(tab4){
+                tab4.parentNode.removeChild(tab4);
+            }
+
+            
+        }
+    </script>
+    
+<?php if(isset($_GET["submit"])) { ?>
+    <?php
+    $userInput=$_GET["userInput"];
+    $xml = simplexml_load_file('http://dev.markitondemand.com/MODApis/Api/v2/Lookup/xml?input='.urlencode($userInput));
+    if($xml){ ?>
+        <table class="xmlTable" id="xmlTable" align="center" border="1">
+            <tr>
+                <th class="xmlTableTh">Name</th>
+                <th class="xmlTableTh">Symbol</th>
+                <th class="xmlTableTh">Exchange</th>
+                <th class="xmlTableTh">Details</th>
+            </tr>
+        
+            <?php
+                foreach($xml as $LookupResult){        
+                    $symbol = $LookupResult->Symbol;
+                    $name = $LookupResult->Name;
+                    $exchange = $LookupResult->Exchange;
+            ?>
+            <tr>
+                <td class="xmlTableTd"><?php echo $name;?></td>
+                <td class="xmlTableTd"><?php echo $symbol;?></td>
+                <td class="xmlTableTd"><?php echo $exchange;?></td>
+                <td class="xmlTableTd"><a href="<?php echo $_SERVER['PHP_SELF']."?userInput=".urlencode($_GET['userInput'])."&symbol=".urlencode($symbol);?>">More Info</a></td>
+            </tr>
+        <?php } ?>    
+        </table>    
+            
+          <?php } else {?>
+                    <table class="xmlNoRecordsFound" id="xmlNoRecordsFound" width="700px" align="center" border="1">  
+                        <tr>
+                            <td>No Records Found</td>
+                        </tr>    
+                    </table>
+        <?php   } ?>
+             
+    <?php }
+    else if(isset($_GET['symbol'])) { 
+        $symbol = $_GET['symbol'];
+        $json = file_get_contents('http://dev.markitondemand.com/MODApis/Api/v2/Quote/json?symbol='.urlencode($symbol));
+        $jsonData = json_decode($json,true);
+        if($jsonData['Status'] == "SUCCESS") { ?>
+            <table class="jsonTable" id="jsonTable" align="center" border="1">
+                <tr>
+                    <th>Name</th>
+                    <td><?php echo $jsonData['Name']?></td>
+                </tr>    
+                <tr>
+                    <th>Symbol</th>
+                    <td><?php echo $jsonData['Symbol']?></td>
+                </tr>
+                <tr>    
+                    <th>Last Price</th>
+                    <td><?php echo $jsonData['LastPrice']?></td>
+                </tr>
+                <tr>  
+                    <th>Change</th>
+                    <td><?php $formattedChange = number_format($jsonData['Change'],2); 
+                            echo $formattedChange;
+                            if($formattedChange<0){?>
+                                <img src="http://cs-server.usc.edu:45678/hw/hw6/images/Red_Arrow_Down.png" height="10" width="10">
+                            <?php } 
+                            elseif ($formattedChange>0) {?>
+                                <img src="http://cs-server.usc.edu:45678/hw/hw6/images/Green_Arrow_Up.png" height="10" width="10">
+                            <?php 
+                                } ?>
+                    </td>
+                </tr>
+                <tr>     
+                    <th>Change Percent</th>
+                    <td><?php $formattedChangePercent = number_format($jsonData['ChangePercent'],2);
+                            echo $formattedChangePercent."%";
+                            
+                            if($formattedChangePercent<0){?>
+                                <img src="http://cs-server.usc.edu:45678/hw/hw6/images/Red_Arrow_Down.png" height="10" width="10">
+                            <?php } 
+                            elseif ($formattedChangePercent>0) {?>
+                                <img src="http://cs-server.usc.edu:45678/hw/hw6/images/Green_Arrow_Up.png" height="10" width="10">
+                            <?php 
+                                } ?>
+                    </td>
+                </tr>
+                <tr>      
+                    <th>Timestamp</th>
+                    <td><?php $Timestamp=date_create($jsonData['Timestamp']); 
+                        echo date_format($Timestamp,"Y-m-d h:i A")." EST";?>
+                    </td>
+                </tr>
+                <tr>     
+                    <th>Market Cap</th>
+                    <td><?php $formattedMarketCap = $jsonData['MarketCap']; 
+                        if($formattedMarketCap>10000000)
+                            echo round(($formattedMarketCap/1000000000),2).' B';
+                        else if($formattedMarketCap<=10000000)
+                            echo round(($formattedMarketCap/1000000),2).' M';
+                        ?></td>
+                </tr>
+                <tr>    
+                    <th>Volume</th>
+                    <td><?php $formattedVolume = number_format($jsonData['Volume'],0,'',','); 
+                        echo $formattedVolume ?>
+                    </td>
+                </tr>
+                <tr>    
+                    <th>Change YTD</th>
+                    <td><?php $difference = $jsonData['LastPrice'] - $jsonData['ChangeYTD'];
+                            if($difference<0){ 
+                                echo "(".$difference.")";?>
+                                <img src="http://cs-server.usc.edu:45678/hw/hw6/images/Red_Arrow_Down.png" height="10" width="10">
+                            <?php } 
+                            elseif ($difference>0) {
+                                echo $difference; ?>
+                                <img src="http://cs-server.usc.edu:45678/hw/hw6/images/Green_Arrow_Up.png" height="10" width="10">
+                            <?php 
+                                } ?> 
+
+                    </td>
+                </tr>
+                <tr>    
+                    <th>Change Percent YTD</th>
+                    <td><?php $formattedChangePercentYTD = number_format($jsonData['ChangePercentYTD'],2);
+                            if($formattedChangePercentYTD<0){ 
+                                echo $formattedChangePercentYTD."%"?>
+                                <img src="http://cs-server.usc.edu:45678/hw/hw6/images/Red_Arrow_Down.png" height="10" width="10">
+                            <?php } 
+                            elseif ($formattedChangePercentYTD>0) {
+                                echo $formattedChangePercentYTD."%"?>
+                                <img src="http://cs-server.usc.edu:45678/hw/hw6/images/Green_Arrow_Up.png" height="10" width="10">
+                            <?php 
+                                } ?> 
+                    </td>
+                </tr>
+                <tr>    
+                    <th>High</th>
+                    <td><?php echo $jsonData['High']?></td>
+                </tr>
+                <tr>    
+                    <th>Low</th>
+                    <td><?php echo $jsonData['Low']?></td>
+                </tr>
+                <tr>    
+                    <th>Open</th>
+                    <td><?php echo $jsonData['Open']?></td>
+                </tr>
+        </table>    
+   <?php } else { ?>
+            <table class="xmlNoRecordsFound" id="jsonNoStockInformation" width="700px" align="center" border="1">  
+                        <tr>
+                            <td>There is no stock information available</td>
+                        </tr>    
+            </table>
+    <?php }
+    } ?> 
+</body>
+</html>     
