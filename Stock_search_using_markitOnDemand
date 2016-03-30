@@ -232,12 +232,13 @@
                 <tr>    
                     <th>Change YTD</th>
                     <td><?php $difference = $jsonData['LastPrice'] - $jsonData['ChangeYTD'];
-                            if($difference<0){ 
-                                echo "(".$difference.")";?>
+                            $formattedDifference = number_format($difference,2);
+                            if($formattedDifference<0){ 
+                                echo "(".$formattedDifference.")";?>
                                 <img src="http://cs-server.usc.edu:45678/hw/hw6/images/Red_Arrow_Down.png" height="10" width="10">
                             <?php } 
-                            elseif ($difference>0) {
-                                echo $difference; ?>
+                            elseif ($formattedDifference>0) {
+                                echo $formattedDifference; ?>
                                 <img src="http://cs-server.usc.edu:45678/hw/hw6/images/Green_Arrow_Up.png" height="10" width="10">
                             <?php 
                                 } ?> 
